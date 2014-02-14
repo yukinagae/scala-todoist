@@ -1,0 +1,6 @@
+[debug] Running TaskDef(scala_todoist.CoreSpec, specs2 Specification fingerprint, false, [SuiteSelector])
+[debug] Summary for ScalaCheck not available.
+[debug] Summary for specs2 not available.
+[info] Passed: Total 1, Failed 0, Errors 0, Passed 1
+[debug] Passed tests:
+[debug] 	scala_todoist.CoreSpec
