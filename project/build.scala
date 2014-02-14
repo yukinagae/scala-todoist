@@ -6,7 +6,6 @@ import com.typesafe.sbteclipse.plugin.EclipsePlugin.EclipseKeys
 object BuildSettings {
   val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "com.yukinagae",
-    //    name := "scala-todoist",
     version := "0.0.1",
     scalaVersion := "2.10.3",
     scalacOptions := Seq("-deprecation"),
@@ -25,18 +24,18 @@ object ScalaMacroDebugBuild extends Build {
   import BuildSettings._
 
   lazy val root: Project = Project(
-    "root",
+    "scala-todoist",
     file("."),
-    settings = buildSettings ++ Seq(publishArtifact := false)).aggregate(macros, scala_todoist)
+    settings = buildSettings ++ Seq(publishArtifact := false)).aggregate(macro, scala_todoist)
 
-  lazy val macros: Project = Project(
-    "macros",
-    file("macros"),
+  lazy val macro: Project = Project(
+    "macro",
+    file("macro"),
     settings = buildSettings ++ Seq(
       libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-reflect" % _)))
 
   lazy val scala_todoist: Project = Project(
     "scala_todoist",
     file("scala_todoist"),
-    settings = buildSettings ++ Seq(publishArtifact := false)).dependsOn(macros)
+    settings = buildSettings ++ sbtassembly.Plugin.assemblySettings ++ Seq(publishArtifact := false)).dependsOn(macro)
 }
