@@ -12,7 +12,7 @@ object Core {
 
   val base = "https://todoist.com/API/"
 
-  var token = "" // TODO
+  var token = "hogehoge" // TODO
 
   //  val todo_methods = List("login", "getTimeZones")
 
@@ -21,7 +21,7 @@ object Core {
 
     val paramList = params.map(x => new BasicNameValuePair(x._1, x._2))
 
-    val entity = new UrlEncodedFormEntity(paramList)
+    val entity = new UrlEncodedFormEntity(new BasicNameValuePair("token", token) :: paramList)
     val post = new HttpPost(s"http://todoist.com/API/${method}/")
     post.setEntity(entity)
     val response = client.execute(post)

@@ -19,9 +19,9 @@ class CoreSpec extends Specification {
 
       val params = List(("email", "12345@gmail.com"), ("password", "12345"))
 
-      val response = Core.call("login", params)
+      println(Core.call("login", params))
+      println(Core.call("getProjects", Nil))
 
-      println(response)
       success
     }
   }
