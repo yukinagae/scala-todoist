@@ -10,3 +10,7 @@
 /project/project
 /project/target
 /.history
+
+/macros/target
+
+/scala-todoist/target
