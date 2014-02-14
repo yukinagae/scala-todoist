@@ -10,17 +10,20 @@ import org.apache.http.entity.StringEntity
 import org.apache.http.client.entity.UrlEncodedFormEntity
 import org.apache.http.message.BasicNameValuePair
 import org.apache.http.Consts
-import scala_todoist.Core
+import scala_todoist.{ Core => Todo }
 
 class CoreSpec extends Specification {
 
-  "Core" should {
-    "hoge" in {
+  "scala-todoist" should {
+    "login" in {
 
       val params = List(("email", "12345@gmail.com"), ("password", "12345"))
 
-      println(Core.call("login", params))
-      println(Core.call("getProjects", Nil))
+      val todo = new Todo()
+
+      println(todo.login(params))
+      println(todo.getProjects(Nil))
+      println(todo.hoge(Nil))
 
       success
     }
