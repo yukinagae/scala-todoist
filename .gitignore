@@ -7,10 +7,18 @@
 /.project
 /target
 
+/macro/.classpath
+/macro/.cache
+/macro/.project
+/macro/target
+
+/scala_todoist/.classpath
+/scala_todoist/.cache
+/scala_todoist/.project
+/scala_todoist/target
+
+
 /project/project
 /project/target
 /.history
 
-/macros/target
-
-/scala_todoist/target
