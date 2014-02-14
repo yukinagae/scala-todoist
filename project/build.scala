@@ -19,9 +19,10 @@ object MyBuild extends Build {
       scalaVersion := ScalaVersion,
       scalacOptions := Seq("-deprecation"),
       libraryDependencies ++= Seq(
+        "org.apache.httpcomponents" % "httpclient" % "4.3.1",
         "org.specs2" %% "specs2" % "2.3.8" % "test",
-        "junit" % "junit" % "4.11" % "test"
-      ),
+        "junit" % "junit" % "4.11" % "test" //
+        ),
       EclipseKeys.withSource := true,
       javacOptions in compile ++= Seq("-target", "1.7", "-source", "1.7"),
       testOptions in Test += Tests.Argument(TestFrameworks.Specs2, "junitxml", "console") //
