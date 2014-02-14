@@ -10,9 +10,8 @@ import org.apache.http.entity.StringEntity
 import org.apache.http.client.entity.UrlEncodedFormEntity
 import org.apache.http.message.BasicNameValuePair
 import org.apache.http.Consts
-import scala_todoist.{ Core => Todo }
 
-class CoreSpec extends Specification {
+class TodoSpec extends Specification {
 
   "scala-todoist" should {
     "login" in {
@@ -20,8 +19,7 @@ class CoreSpec extends Specification {
       val todo = new Todo()
 
       println(todo.login(List(("email", "12345@gmail.com"), ("password", "12345"))))
-      //      println(todo.getProjects(Nil))
-      //      println(todo.addItem(List(("project_id", "121366566"), ("content", "test item"))))
+      println(todo.getProjects(Nil))
 
       success
     }
