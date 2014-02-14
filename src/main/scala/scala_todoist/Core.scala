@@ -14,15 +14,15 @@ object Core {
 
   var token = "" // TODO
 
-  val todo_methods = List("login", "getTimeZones")
+  //  val todo_methods = List("login", "getTimeZones")
 
-  def login(params: List[(String, String)]): String = {
+  def call(method: String, params: List[(String, String)]): String = {
     val client = HttpClients.createDefault()
 
     val paramList = params.map(x => new BasicNameValuePair(x._1, x._2))
 
     val entity = new UrlEncodedFormEntity(paramList)
-    val post = new HttpPost("http://todoist.com/API/login/")
+    val post = new HttpPost(s"http://todoist.com/API/${method}/")
     post.setEntity(entity)
     val response = client.execute(post)
 
