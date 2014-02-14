@@ -23,7 +23,6 @@ class CoreSpec extends Specification {
 
       println(todo.login(params))
       println(todo.getProjects(Nil))
-      println(todo.hoge(Nil))
 
       success
     }

@@ -9,22 +9,16 @@ import org.apache.http.message.BasicNameValuePair
 import org.apache.http.util.EntityUtils
 
 import scala.util.parsing.json.JSON
-import scala.language.dynamics
 
-class Core extends Dynamic {
+class Core {
 
   val base = "https://todoist.com/API/"
 
   var token: String = ""
 
-  val todo_methods = List("login", "getTimeZones", "getProjects")
-
-  def applyDynamic(methodName: String)(params: List[(String, String)]): String = {
-    if (!todo_methods.contains(methodName)) {
-      return s"[Error] ${methodName} is not implemented yet."
-    }
-    call(methodName, params)
-  }
+  def login(params: List[(String, String)]): String = call("login", params)
+  def getTimeZones(params: List[(String, String)]): String = call("getTimeZones", params)
+  def getProjects(params: List[(String, String)]): String = call("getProjects", params)
 
   def call(method: String, params: List[(String, String)]): String = {
     val client = HttpClients.createDefault()
