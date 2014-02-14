@@ -8,3 +8,8 @@ test
 exit
 compile
 exit
+test
+clean
+compile
+test
+exit
