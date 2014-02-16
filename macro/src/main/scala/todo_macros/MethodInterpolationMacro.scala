@@ -14,27 +14,85 @@ import scala.language.dynamics
 import scala.language.experimental.macros
 import scala.reflect.macros._
 
+import scala.language.dynamics
+
+/**
+ * macro that checks the called method is defined in todo_methods
+ */
 object MethodInterpolationMacro {
 
   def applyDynamicImpl(c: Context)(methodName: c.Expr[String])(params: c.Expr[List[(String, String)]]): c.Expr[String] = {
     import c.universe._
     val _name: String = c.eval(c.Expr[String](c.resetAllAttrs(methodName.tree.duplicate)))
+    // check method name
     if (!todo_methods.contains(_name)) {
       c.error(c.enclosingPosition, s"${_name} is not implemented.")
     }
-    reify(call(methodName.splice, params.splice))
+    // call the API
+    reify((c.Expr[Todo](c.prefix.tree)).splice.call(methodName.splice, params.splice))
   }
 
-  def todo_methods = List( //
+  /**
+   * available methods
+   */
+  val todo_methods = List( //
     "login", //
+    "getTimezones", //
+    "register", //
+    "updateUser", //
     "getProjects", //
-    "addItem" //
+    "getProject", //
+    "addProject", //
+    "updateProject", //
+    "updateProjectOrders", //
+    "deleteProject", //
+    "archiveProject", //
+    "unarchiveProject", //
+    "getLabels", //
+    "addLabel", //
+    "updateLabel", //
+    "updateLabelColor", //
+    "deleteLabel", //
+    "getUncompletedItems", //
+    "getAllCompletedItems", //
+    "getCompletedItems", //
+    "getItemsById", //
+    "addItem", //
+    "updateItem", //
+    "updateOrders", //
+    "moveItems", //
+    "updateRecurringDate", //
+    "deleteItems", //
+    "completeItems", //
+    "uncompleteItems", //
+    "addNote", //
+    "updateNote", //
+    "deleteNote", //
+    "getNotes", //
+    "query" //
     )
+}
 
+/**
+ * Todo class
+ */
+trait Todo extends Dynamic {
+
+  def applyDynamic(methodName: String)(params: List[(String, String)]): String = macro MethodInterpolationMacro.applyDynamicImpl
+
+  /**
+   * store token, gained after login
+   */
   var token: String = ""
 
+  /**
+   * base URL of the API
+   */
   val base = "https://todoist.com/API/"
 
+  /**
+   * call the API with JSON parameter
+   */
   def call(method: String, params: List[(String, String)]): String = {
     val client = HttpClients.createDefault()
 
@@ -54,13 +112,12 @@ object MethodInterpolationMacro {
         case Some(v) =>
           val map: Map[String, Option[Any]] = v.asInstanceOf[Map[String, Option[Any]]]
           token = map.getOrElse("token", "").toString
-        case None =>
+        case None => token = ""
       }
     }
 
-    EntityUtils.consume(entity)
+    EntityUtils.consume(resentity)
 
     responseString
   }
-
 }

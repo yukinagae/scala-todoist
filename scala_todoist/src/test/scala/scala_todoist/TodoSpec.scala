@@ -16,10 +16,17 @@ class TodoSpec extends Specification {
   "scala-todoist" should {
     "login" in {
 
-      val todo = new Todo()
+      // you can create each Todo instance.
+      val todo1 = new Todo()
+      val todo2 = new Todo()
 
-      println(todo.login(List(("email", "12345@gmail.com"), ("password", "12345"))))
-      println(todo.getProjects(Nil))
+      println(todo1.login(List(("email", "12345@gmail.com"), ("password", "12345"))))
+      println(todo1.getProjects(Nil))
+
+      println(todo2.login(List(("email", "notExist@gmail.com"), ("password", "notExist"))))
+      println(todo2.getProjects(Nil))
+
+      println(todo1.getProjects(Nil))
 
       success
     }
