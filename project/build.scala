@@ -10,7 +10,7 @@ object BuildSettings {
     scalaVersion := "2.10.3",
     scalacOptions := Seq("-deprecation"),
     libraryDependencies ++= Seq(
-      "org.apache.httpcomponents" % "httpclient" % "4.3.1",
+      "org.apache.httpcomponents" % "httpclient" % "4.3.1" % "provided",
       "org.specs2" %% "specs2" % "2.3.8" % "test",
       "junit" % "junit" % "4.11" % "test" //
       ),
