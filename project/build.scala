@@ -22,6 +22,7 @@ object BuildSettings {
 
 object ScalaMacroDebugBuild extends Build {
   import BuildSettings._
+  import sbtassembly.Plugin.AssemblyKeys._
 
   lazy val root: Project = Project(
     "scala-todoist",
@@ -37,5 +38,12 @@ object ScalaMacroDebugBuild extends Build {
   lazy val scala_todoist: Project = Project(
     "scala_todoist",
     file("scala_todoist"),
-    settings = buildSettings ++ sbtassembly.Plugin.assemblySettings ++ Seq(publishArtifact := false)).dependsOn(macro)
+    settings = buildSettings ++
+    sbtassembly.Plugin.assemblySettings ++
+    addArtifact(Artifact("scala-todoist", "assembly"), assembly) ++
+    Seq(
+      test in assembly := {},
+      assemblyOption in assembly ~= { _.copy(includeScala = false) },
+      jarName in assembly := "scala-todoist.jar"
+    )).dependsOn(macro)
 }
