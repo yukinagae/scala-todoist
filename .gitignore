@@ -11,12 +11,13 @@
 /macro/.cache
 /macro/.project
 /macro/target
+/macro/.settings
 
 /scala_todoist/.classpath
 /scala_todoist/.cache
 /scala_todoist/.project
 /scala_todoist/target
-
+/scala_todoist/.settings
 
 /project/project
 /project/target
